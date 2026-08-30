@@ -1,0 +1,159 @@
+<div class="row mb-4">
+    <div class="col-12"><h3><i class="bi bi-speedometer2 me-2"></i>Doctor
+            Dashboard</h3></div>
+
+    <!-- Stat Cards -->
+    <div class="col-md-3">
+        <div class="card stat-card bg-primary text-white">
+            <div class="card-body">
+                <h2><%= stats.totalCases || 0 %></h2>
+                <small>Total Cases</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card bg-warning text-dark">
+            <div class="card-body">
+                <h2><%= stats.pendingReview || 0 %></h2>
+                <small>Pending Review</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card bg-success text-white">
+            <div class="card-body">
+                <h2><%= stats.reviewed || 0 %></h2>
+                <small>Reviewed</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card bg-danger text-white">
+            <div class="card-body">
+                <h2><%= stats.redFlags || 0 %></h2>
+                <small>Red Flags</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div
+                class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>Pending
+                    Reviews</h5>
+                <a href="/dashboard/alerts"
+                    class="btn btn-sm btn-outline-danger">View All Alerts</a>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Patient</th>
+                            <th>Chief Complaint</th>
+                            <th>Confidence</th>
+                            <th>Red Flags</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (pendingPatients && pendingPatients.length > 0) {
+                        %>
+                        <% pendingPatients.forEach(p => {
+                        const confidence = p.aiSummary?.confidence || 0;
+                        const hasRealRedFlags = p.aiSummary?.redFlags?.length >
+                        0 &&
+                        p.aiSummary.redFlags[0] !== 'None detected';
+                        %>
+                        <tr>
+                            <td>
+                                <strong><%= p.name %></strong><br>
+                                <small class="text-muted"><%= p.age %>y, <%=
+                                    p.gender %></small>
+                            </td>
+                            <td><%= p.aiSummary?.chiefComplaint || 'N/A' %></td>
+                            <td>
+                                <div class="progress" style="height: 8px;">
+                                    <div
+                                        class="progress-bar <%= confidence > 80 ? 'bg-success' : 'bg-warning' %>"
+                                        data-confidence="<%= confidence %>">
+                                    </div>
+                                </div>
+
+                                <small><%= confidence %>%</small>
+                            </td>
+                            <td>
+                                <% if (hasRealRedFlags) { %>
+                                <span class="badge bg-danger"><%=
+                                    p.aiSummary.redFlags.length %></span>
+                                <% } else { %>
+                                <span class="badge bg-secondary">0</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <a href="/dashboard/review/<%= p._id %>"
+                                    class="btn btn-sm btn-primary">Review</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                        <% } else { %>
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">
+                                <i class="bi bi-inbox fs-4 d-block mb-2"></i>
+                                No pending reviews
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card shadow-sm mb-3">
+            <div class="card-header bg-white">
+                <h6 class="mb-0"><i
+                        class="bi bi-file-earmark-check me-2"></i>Recent
+                    Documents</h6>
+            </div>
+            <div class="list-group list-group-flush">
+                <% if (recentDocuments && recentDocuments.length > 0) { %>
+                <% recentDocuments.forEach(d => { %>
+                <div
+                    class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <small class="fw-bold"><%= d.patient?.name || 'Unknown'
+                            %></small><br>
+                        <small class="text-muted"><%= d.documentType %> — <%=
+                            d.originalName %></small>
+                    </div>
+                    <span class="badge bg-success"><i
+                            class="bi bi-check"></i></span>
+                </div>
+                <% }) %>
+                <% } else { %>
+                <div class="list-group-item text-muted text-center py-3">No
+                    documents yet</div>
+                <% } %>
+            </div>
+        </div>
+        <div class="card shadow-sm bg-ayurveda">
+            <div class="card-body text-center">
+                <i class="bi bi-leaf fs-1 text-success"></i>
+                <h6 class="mt-2">Ayurvedic Cases</h6>
+                <p class="small text-muted mb-0">Traditional assessment
+                    integrated with modern diagnostics.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.progress-bar[data-confidence]').forEach(bar => {
+        const confidence = Number(bar.dataset.confidence);
+        bar.style.width = confidence + '%';
+    });
+</script>

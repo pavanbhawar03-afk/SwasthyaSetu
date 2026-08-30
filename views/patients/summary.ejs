@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-success text-white d-flex justify-content-between">
+        <span><i class="bi bi-file-medical me-2"></i>AI Clinical Summary</span>
+        <span class="badge bg-light text-dark">Confidence: <%= patient.aiSummary.confidence %>%</span>
+      </div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-6"><strong>Patient:</strong> <%= patient.name %></div>
+          <div class="col-md-6"><strong>Date:</strong> <%= new Date(patient.aiSummary.generatedAt).toLocaleString() %></div>
+        </div>
+        <hr>
+        <div class="mb-3">
+          <h6 class="text-primary">Chief Complaint</h6>
+          <p><%= patient.aiSummary.chiefComplaint %></p>
+        </div>
+        <div class="mb-3">
+          <h6 class="text-primary">History of Present Illness</h6>
+          <p><%= patient.aiSummary.historyOfPresentIllness %></p>
+        </div>
+        <div class="mb-3">
+          <h6 class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i>Red Flags Detected</h6>
+          <ul class="list-group list-group-flush">
+            <% patient.aiSummary.redFlags.forEach(rf => { %>
+              <li class="list-group-item text-danger"><i class="bi bi-dot me-1"></i><%= rf %></li>
+            <% }) %>
+          </ul>
+        </div>
+        <div class="mb-3">
+          <h6 class="text-primary">Suggested Diagnosis</h6>
+          <p class="fw-bold"><%= patient.aiSummary.suggestedDiagnosis %></p>
+        </div>
+        <div class="mb-3">
+          <h6 class="text-primary">Differential Diagnosis</h6>
+          <p><%= patient.aiSummary.differentialDiagnosis.join(', ') %></p>
+        </div>
+        <div class="mb-3">
+          <h6 class="text-primary">Recommended Tests</h6>
+          <p><%= patient.aiSummary.recommendedTests.join(', ') %></p>
+        </div>
+        <% if (patient.aiSummary.ayurvedicPerspective) { %>
+        <div class="mb-3 p-3 bg-ayurveda rounded">
+          <h6 class="text-success"><i class="bi bi-leaf me-1"></i>Ayurvedic Perspective</h6>
+          <p class="mb-0"><%= patient.aiSummary.ayurvedicPerspective %></p>
+        </div>
+        <% } %>
+        <div class="d-flex gap-2 mt-4">
+          <a href="/documents/upload/<%= patient._id %>" class="btn btn-outline-primary"><i class="bi bi-upload me-1"></i>Upload Documents</a>
+          <a href="/dashboard/review/<%= patient._id %>" class="btn btn-primary"><i class="bi bi-eye me-1"></i>Send for Doctor Review</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

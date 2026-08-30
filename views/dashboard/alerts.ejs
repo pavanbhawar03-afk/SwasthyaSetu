@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h3><i class="bi bi-exclamation-triangle-fill me-2 text-danger"></i>Red Flag Alerts</h3>
+  <a href="/dashboard" class="btn btn-outline-primary"><i class="bi bi-arrow-left me-1"></i>Back to Dashboard</a>
+</div>
+
+<div class="row">
+  <% if (alerts && alerts.length > 0) { %>
+    <% alerts.forEach(p => { %>
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card shadow-sm border-danger">
+        <div class="card-header bg-danger text-white d-flex justify-content-between">
+          <span><%= p.name %></span>
+          <span class="badge bg-light text-danger"><%= p.severity || 'Unknown' %></span>
+        </div>
+        <div class="card-body">
+          <p class="mb-1"><strong>Age:</strong> <%= p.age %> / <%= p.gender %></p>
+          <p class="mb-1"><strong>Complaint:</strong> <%= p.aiSummary?.chiefComplaint || 'N/A' %></p>
+          <p class="mb-2 text-danger small">
+            <i class="bi bi-exclamation-circle me-1"></i>
+            <%= p.aiSummary?.redFlags?.join(', ') || 'Red flag detected' %>
+          </p>
+          <a href="/dashboard/review/<%= p._id %>" class="btn btn-sm btn-danger w-100">
+            <i class="bi bi-eye me-1"></i>Review Immediately
+          </a>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  <% } else { %>
+    <div class="col-12 text-center py-5">
+      <i class="bi bi-shield-check fs-1 text-success"></i>
+      <h5 class="mt-3 text-success">No Red Flag Alerts</h5>
+      <p class="text-muted">All patients are stable. No urgent cases pending.</p>
+      <a href="/dashboard" class="btn btn-primary">Go to Dashboard</a>
+    </div>
+  <% } %>
+</div>

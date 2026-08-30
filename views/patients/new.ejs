@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="bi bi-person-plus me-2"></i>New Patient Registration</h4>
+      </div>
+      <div class="card-body p-4">
+        <form action="/patients" method="POST">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Full Name *</label>
+              <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Age *</label>
+              <input type="number" name="age" class="form-control" required>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Gender *</label>
+              <select name="gender" class="form-select" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Phone</label>
+              <input type="tel" name="phone" class="form-control" placeholder="+91-XXXXXXXXXX">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" name="email" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Preferred Language</label>
+              <select name="language" class="form-select">
+                <option value="English">English</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Tamil">Tamil</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Marathi">Marathi</option>
+                <option value="Bengali">Bengali</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label">Case Type</label>
+              <select name="caseType" class="form-select">
+                <option value="General">General</option>
+                <option value="Ayurvedic">Ayurvedic</option>
+                <option value="Emergency">Emergency</option>
+                <option value="Follow-up">Follow-up</option>
+              </select>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <a href="/" class="btn btn-outline-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-arrow-right me-2"></i>Start AI Case Taking</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

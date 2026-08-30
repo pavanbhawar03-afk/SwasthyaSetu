@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card shadow-sm mb-3">
+      <div class="card-header bg-primary text-white d-flex justify-content-between">
+        <span><i class="bi bi-clipboard-check me-2"></i>Case Review: <%= patient.name %></span>
+        <span class="badge bg-light text-dark">AI Confidence: <%= patient.aiSummary?.confidence || 0 %>%</span>
+      </div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-4"><strong>Age:</strong> <%= patient.age %></div>
+          <div class="col-md-4"><strong>Gender:</strong> <%= patient.gender %></div>
+          <div class="col-md-4"><strong>Language:</strong> <%= patient.language %></div>
+        </div>
+        <hr>
+        <h6 class="text-primary">AI Summary</h6>
+        <div class="p-3 bg-light rounded mb-3">
+          <p><strong>Chief Complaint:</strong> <%= patient.aiSummary?.chiefComplaint %></p>
+          <p><strong>Suggested Diagnosis:</strong> <%= patient.aiSummary?.suggestedDiagnosis %></p>
+          <p><strong>Red Flags:</strong> <%= patient.aiSummary?.redFlags?.join(', ') %></p>
+          <% if (patient.aiSummary?.ayurvedicPerspective) { %>
+          <p class="mb-0 text-success"><i class="bi bi-leaf me-1"></i><strong>Ayurvedic:</strong> <%= patient.aiSummary.ayurvedicPerspective %></p>
+          <% } %>
+        </div>
+        
+        <h6 class="text-primary">Attached Documents</h6>
+        <% if (documents.length > 0) { %>
+        <ul class="list-group list-group-flush mb-3">
+          <% documents.forEach(d => { %>
+          <li class="list-group-item d-flex justify-content-between">
+            <span><i class="bi bi-file-earmark me-2"></i><%= d.originalName %> <span class="badge bg-secondary"><%= d.documentType %></span></span>
+            <a href="/documents/<%= d._id %>/results" class="btn btn-sm btn-outline-primary">View</a>
+          </li>
+          <% }) %>
+        </ul>
+        <% } else { %><p class="text-muted">No documents attached.</p><% } %>
+        
+        <form action="/dashboard/review/<%= patient._id %>" method="POST">
+          <div class="mb-3">
+            <label class="form-label fw-bold">Doctor's Diagnosis *</label>
+            <input type="text" name="doctorDiagnosis" class="form-control" placeholder="Enter your final diagnosis" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Clinical Notes</label>
+            <textarea name="doctorNotes" class="form-control" rows="4" placeholder="Additional observations, treatment plan..."></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Validation Status</label>
+            <select name="validationStatus" class="form-select">
+              <option value="reviewed">Approve & Finalize</option>
+              <option value="flagged">Flag for Follow-up</option>
+              <option value="active">Return for More Info</option>
+            </select>
+          </div>
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-circle me-2"></i>Submit Review</button>
+            <a href="/dashboard" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-danger">
+      <div class="card-header bg-danger text-white"><i class="bi bi-exclamation-triangle me-2"></i>Red Flag Alert</div>
+      <div class="card-body">
+        <% if (patient.aiSummary?.redFlags?.length > 0 && patient.aiSummary.redFlags[0] !== 'None detected') { %>
+          <% patient.aiSummary.redFlags.forEach(rf => { %>
+            <div class="alert alert-danger py-2 mb-2"><i class="bi bi-dot me-1"></i><%= rf %></div>
+          <% }) %>
+        <% } else { %>
+          <p class="text-muted mb-0">No red flags detected by AI.</p>
+        <% } %>
+      </div>
+    </div>
+    <div class="card shadow-sm mt-3">
+      <div class="card-header bg-info text-white"><i class="bi bi-activity me-2"></i>Vitals & History</div>
+      <div class="card-body">
+        <p class="mb-1"><strong>Symptoms:</strong> <%= patient.symptoms?.join(', ') || 'N/A' %></p>
+        <p class="mb-1"><strong>History:</strong> <%= patient.medicalHistory || 'N/A' %></p>
+        <p class="mb-0"><strong>Ayurveda:</strong> <%= patient.ayurvedaProfile?.prakriti || 'Not assessed' %></p>
+      </div>
+    </div>
+  </div>
+</div>

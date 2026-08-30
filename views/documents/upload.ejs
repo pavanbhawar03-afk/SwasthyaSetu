@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-success text-white"><i class="bi bi-upload me-2"></i>Upload Medical Document</div>
+      <div class="card-body p-4">
+        <div class="text-center mb-3">
+          <h5><%= patient.name %></h5>
+          <p class="text-muted"><%= patient.age %> yrs | <%= patient.caseType %></p>
+        </div>
+        <form id="uploadForm" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label class="form-label">Document Type</label>
+            <select name="documentType" id="docType" class="form-select">
+              <option value="Lab Report">Lab Report</option>
+              <option value="Prescription">Prescription</option>
+              <option value="Imaging">Imaging (X-Ray/CT/MRI)</option>
+              <option value="Discharge Summary">Discharge Summary</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Select File</label>
+            <input type="file" name="medicalDocument" id="fileInput" class="form-control" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" required>
+            <small class="text-muted">Supports: PDF, JPG, PNG, DOC (Max 10MB)</small>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success" id="uploadBtn">
+              <i class="bi bi-cloud-upload me-2"></i>Upload & Process OCR
+            </button>
+          </div>
+        </form>
+        <div id="uploadStatus" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('uploadBtn');
+  const status = document.getElementById('uploadStatus');
+  const formData = new FormData();
+  formData.append('medicalDocument', document.getElementById('fileInput').files[0]);
+  formData.append('documentType', document.getElementById('docType').value);
+  
+  btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Uploading...';
+  btn.disabled = true;
+  
+  const res = await fetch('/documents/upload/<%= patient._id %>', {
+    method: 'POST',
+    body: formData
+  });
+  const data = await res.json();
+  
+  if (data.success) {
+    status.innerHTML = `<div class="alert alert-success"><i class="bi bi-check-circle me-2"></i>${data.message} <a href="${data.redirect}" class="alert-link">View Results</a></div>`;
+  } else {
+    status.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+    btn.innerHTML = '<i class="bi bi-cloud-upload me-2"></i>Upload & Process OCR';
+    btn.disabled = false;
+  }
+});
+</script>

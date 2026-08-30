@@ -1,0 +1,54 @@
+:root {
+  --medical-primary: #0d7377;
+  --medical-dark: #03256c;
+  --ayurveda-green: #e8f5e9;
+}
+
+.bg-medical { background: linear-gradient(135deg, var(--medical-dark), var(--medical-primary)) !important; }
+.text-medical { color: var(--medical-primary) !important; }
+.bg-ayurveda { background-color: var(--ayurveda-green) !important; }
+
+.stat-card {
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+.stat-card:hover { transform: translateY(-3px); }
+
+.feature-card {
+  border-radius: 16px;
+  transition: all 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.chat-card { border-radius: 16px; }
+.chat-body { border-radius: 0 0 16px 16px; }
+
+.message-bubble {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.avatar { flex-shrink: 0; }
+
+.table-hover tbody tr:hover {
+  background-color: rgba(13, 115, 119, 0.05);
+}
+
+.progress { border-radius: 10px; }

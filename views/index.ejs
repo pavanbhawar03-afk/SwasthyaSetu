@@ -1,0 +1,77 @@
+<div class="row align-items-center py-5">
+  <div class="col-lg-6">
+    <h1 class="display-4 fw-bold text-medical">Smart Case. Better Care.</h1>
+    <p class="lead text-muted">AI-Powered Patient Case-Taking with Ayurvedic Assessment, Document OCR, and Doctor Validation.</p>
+    <div class="d-flex gap-3 mt-4">
+      <a href="/patients/new" class="btn btn-primary btn-lg"><i class="bi bi-person-plus me-2"></i>Start New Case</a>
+      <a href="/dashboard" class="btn btn-outline-primary btn-lg"><i class="bi bi-speedometer2 me-2"></i>Doctor Dashboard</a>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="card stat-card border-0 shadow-sm h-100">
+          <div class="card-body text-center">
+            <h3 class="text-primary"><%= stats.totalPatients %></h3>
+            <small class="text-muted">Total Cases</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card stat-card border-0 shadow-sm h-100">
+          <div class="card-body text-center">
+            <h3 class="text-warning"><%= stats.pendingReview %></h3>
+            <small class="text-muted">Pending Review</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card stat-card border-0 shadow-sm h-100">
+          <div class="card-body text-center">
+            <h3 class="text-danger"><%= stats.redFlags %></h3>
+            <small class="text-muted">Red Flags</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card stat-card border-0 shadow-sm h-100">
+          <div class="card-body text-center">
+            <h3 class="text-success">3+</h3>
+            <small class="text-muted">Languages</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-12 text-center mb-4"><h3 class="fw-bold">Core Features</h3></div>
+  <div class="col-md-4">
+    <div class="card feature-card h-100 border-0 shadow-sm">
+      <div class="card-body text-center p-4">
+        <div class="icon-circle bg-primary text-white mb-3"><i class="bi bi-chat-dots fs-2"></i></div>
+        <h5>AI Chat Case Taking</h5>
+        <p class="text-muted small">Adaptive questioning in regional languages with voice support.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card feature-card h-100 border-0 shadow-sm">
+      <div class="card-body text-center p-4">
+        <div class="icon-circle bg-success text-white mb-3"><i class="bi bi-file-earmark-text fs-2"></i></div>
+        <h5>Document OCR & Auto-Fill</h5>
+        <p class="text-muted small">Upload lab reports, prescriptions. AI extracts and auto-fills records.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card feature-card h-100 border-0 shadow-sm">
+      <div class="card-body text-center p-4">
+        <div class="icon-circle bg-danger text-white mb-3"><i class="bi bi-shield-check fs-2"></i></div>
+        <h5>Doctor Validation</h5>
+        <p class="text-muted small">AI summaries with red-flag alerts for physician review and approval.</p>
+      </div>
+    </div>
+  </div>
+</div>

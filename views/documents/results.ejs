@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-lg-5">
+    <div class="card shadow-sm mb-3">
+      <div class="card-header bg-dark text-white"><i class="bi bi-file-earmark me-2"></i>Document</div>
+      <div class="card-body text-center">
+        <i class="bi bi-file-earmark-pdf fs-1 text-danger"></i>
+        <h6 class="mt-2"><%= document.originalName %></h6>
+        <span class="badge bg-primary"><%= document.documentType %></span>
+        <p class="text-muted small mt-2">Status: <span class="badge bg-<%= document.processingStatus === 'completed' ? 'success' : 'warning' %>"><%= document.processingStatus %></span></p>
+      </div>
+    </div>
+    <div class="d-grid">
+      <button class="btn btn-primary" id="autofillBtn" onclick="applyAutoFill()">
+        <i class="bi bi-magic me-2"></i>Auto-Fill to Patient Record
+      </button>
+      <a href="/patients/<%= document.patient._id %>" class="btn btn-outline-secondary mt-2">Back to Patient</a>
+    </div>
+    <div id="autofillStatus" class="mt-2"></div>
+  </div>
+  
+  <div class="col-lg-7">
+    <div class="card shadow-sm mb-3">
+      <div class="card-header bg-info text-white"><i class="bi bi-eye me-2"></i>OCR Extracted Data</div>
+      <div class="card-body">
+        <table class="table table-sm">
+          <tbody>
+            <% Object.entries(document.extractedData || {}).forEach(([key, value]) => { %>
+              <% if (value) { %>
+              <tr>
+                <td class="fw-bold text-capitalize" style="width: 30%"><%= key.replace(/([A-Z])/g, ' $1') %></td>
+                <td><%= Array.isArray(value) ? value.join(', ') : value %></td>
+              </tr>
+              <% } %>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="card shadow-sm">
+      <div class="card-header bg-secondary text-white"><i class="bi bi-file-text me-2"></i>Raw OCR Text</div>
+      <div class="card-body">
+        <pre class="small text-muted mb-0" style="white-space: pre-wrap;"><%= document.ocrText || 'Processing...' %></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+async function applyAutoFill() {
+  const btn = document.getElementById('autofillBtn');
+  btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Applying...';
+  btn.disabled = true;
+  
+  const res = await fetch('/documents/<%= document._id %>/autofill', { method: 'POST' });
+  const data = await res.json();
+  
+  if (data.success) {
+    document.getElementById('autofillStatus').innerHTML = `
+      <div class="alert alert-success">
+        <i class="bi bi-check-circle me-2"></i>${data.message}
+        <ul class="mb-0 mt-2 small">${data.autoFilled.map(f => `<li>${f}</li>`).join('')}</ul>
+      </div>`;
+  }
+}
+</script>

@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h3><i class="bi bi-people me-2"></i>All Patients</h3>
+  <a href="/patients/new" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>New Patient</a>
+</div>
+
+<div class="card shadow-sm border-0">
+  <div class="table-responsive">
+    <table class="table table-hover mb-0">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Age / Gender</th>
+          <th>Case Type</th>
+          <th>Status</th>
+          <th>Registered</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (patients && patients.length > 0) { %>
+          <% patients.forEach(p => { %>
+          <tr>
+            <td><strong><%= p.name %></strong></td>
+            <td><%= p.age %> / <%= p.gender %></td>
+            <td><span class="badge bg-info"><%= p.caseType %></span></td>
+            <td>
+              <span class="badge bg-<%= p.status === 'reviewed' ? 'success' : p.status === 'pending_review' ? 'warning' : 'secondary' %>">
+                <%= p.status %>
+              </span>
+            </td>
+            <td><%= new Date(p.createdAt).toLocaleDateString() %></td>
+            <td>
+              <a href="/patients/<%= p._id %>" class="btn btn-sm btn-outline-primary me-1" title="View">
+                <i class="bi bi-eye"></i>
+              </a>
+              <a href="/patients/<%= p._id %>/case-taking" class="btn btn-sm btn-outline-success" title="Case Taking">
+                <i class="bi bi-chat-dots"></i>
+              </a>
+            </td>
+          </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="6" class="text-center text-muted py-4">
+              <i class="bi bi-inbox fs-4 d-block mb-2"></i>
+              No patients found. <a href="/patients/new">Register one</a>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
