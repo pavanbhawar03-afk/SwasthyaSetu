@@ -1,0 +1,611 @@
+:root {
+  --medical-primary: #0d7377;
+  --medical-dark: #03256c;
+  --ayurveda-green: #e8f5e9;
+}
+
+.bg-medical { background: linear-gradient(135deg, var(--medical-dark), var(--medical-primary)) !important; }
+.text-medical { color: var(--medical-primary) !important; }
+.bg-ayurveda { background-color: var(--ayurveda-green) !important; }
+
+.stat-card {
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+.stat-card:hover { transform: translateY(-3px); }
+
+.feature-card {
+  border-radius: 16px;
+  transition: all 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.chat-card { border-radius: 16px; }
+.chat-body { border-radius: 0 0 16px 16px; }
+
+.message-bubble {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.avatar { flex-shrink: 0; }
+
+.table-hover tbody tr:hover {
+  background-color: rgba(13, 115, 119, 0.05);
+}
+
+.progress { border-radius: 10px; }
+
+
+/* ============================================
+   CASECARE AI - SIH26047 Stylesheet
+   Smart India Hackathon 2025
+   ============================================ */
+
+:root {
+  --medical-primary: #0d7377;
+  --medical-dark: #03256c;
+  --medical-accent: #14a085;
+  --ayurveda-green: #e8f5e9;
+  --footer-bg: #023e8a;
+  --text-muted-custom: #6c757d;
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+
+
+
+/* Top Announcement Bar */
+.top-bar {
+  background: linear-gradient(90deg, #023e8a 0%, #0077b6 50%, #0096c7 100%);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.top-bar i {
+  color: #90e0ef;
+}
+
+/* Main Navbar */
+.navbar-medical {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  padding: 0.6rem 0;
+  box-shadow: 0 4px 20px rgba(2, 62, 138, 0.12);
+  border-bottom: 3px solid #0077b6;
+  transition: all 0.3s ease;
+}
+
+/* Brand Logo Area */
+.navbar-medical .navbar-brand {
+  padding: 0;
+  margin-right: 2rem;
+}
+
+.brand-icon {
+  width: 46px;
+  height: 46px;
+  background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+  color: #ffffff;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 6px 16px rgba(0, 119, 182, 0.35);
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover .brand-icon {
+  transform: rotate(-5deg) scale(1.05);
+  box-shadow: 0 8px 22px rgba(0, 119, 182, 0.45);
+}
+
+.brand-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #023e8a;
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #023e8a, #0077b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-tagline {
+  font-size: 0.68rem;
+  color: #0077b6;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+/* Nav Links */
+.navbar-medical .navbar-nav {
+  gap: 4px;
+}
+
+.navbar-medical .nav-link {
+  color: #495057;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 10px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  margin: 0 2px;
+}
+
+.navbar-medical .nav-link i {
+  font-size: 1.05rem;
+  margin-right: 5px;
+  color: #0077b6;
+  transition: all 0.25s ease;
+}
+
+/* Hover State */
+.navbar-medical .nav-link:hover {
+  color: #0077b6;
+  background: rgba(0, 119, 182, 0.08);
+  transform: translateY(-1px);
+}
+
+.navbar-medical .nav-link:hover i {
+  color: #023e8a;
+  transform: scale(1.1);
+}
+
+/* Active State */
+.navbar-medical .nav-link.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+  box-shadow: 0 4px 14px rgba(0, 119, 182, 0.35);
+}
+
+.navbar-medical .nav-link.active i {
+  color: #ffffff;
+}
+
+/* Alert Badge on Nav */
+#alertBadge {
+  font-size: 0.6rem;
+  padding: 0.25em 0.5em;
+  background: linear-gradient(135deg, #e63946, #d62828) !important;
+  box-shadow: 0 2px 8px rgba(230, 57, 70, 0.4);
+  animation: pulse-badge 2s infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.15); }
+}
+
+/* Quick Action Button */
+.btn-accent {
+  background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.55rem 1.3rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(0, 119, 182, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-accent:hover {
+  background: linear-gradient(135deg, #023e8a 0%, #0077b6 100%);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 119, 182, 0.4);
+}
+
+.btn-accent:active {
+  transform: translateY(0);
+}
+
+/* Toggler (Mobile) */
+.navbar-toggler {
+  border: 2px solid rgba(0, 119, 182, 0.2);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.25);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 119, 182, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Mobile Menu Dropdown */
+@media (max-width: 991px) {
+  .navbar-medical {
+    padding: 0.5rem 0;
+  }
+  
+  .navbar-collapse {
+    background: #ffffff;
+    border-radius: 16px;
+    margin-top: 0.75rem;
+    padding: 1rem;
+    box-shadow: 0 10px 40px rgba(2, 62, 138, 0.15);
+    border: 1px solid rgba(0, 119, 182, 0.1);
+  }
+  
+  .navbar-medical .nav-link {
+    padding: 0.75rem 1rem;
+    margin: 3px 0;
+    border-radius: 10px;
+  }
+  
+  .navbar-medical .nav-link.active {
+    box-shadow: 0 2px 10px rgba(0, 119, 182, 0.25);
+  }
+  
+  .btn-accent {
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .brand-title {
+    font-size: 1.2rem;
+  }
+  
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.3rem;
+  }
+}
+
+/* Sticky Navbar Shadow on Scroll */
+.navbar-medical.sticky-top.scrolled {
+  box-shadow: 0 6px 30px rgba(2, 62, 138, 0.18);
+}
+
+/* Top Bar
+.top-bar {
+  font-size: 0.75rem;
+  letter-spacing: 0.3px;
+}
+
+/* Navbar Medical */
+
+/*
+.navbar-medical {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  box-shadow: 0 2px 15px rgba(13, 115, 119, 0.1);
+  padding: 0.75rem 0;
+  border-bottom: 3px solid var(--medical-primary);
+}
+
+.brand-icon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, var(--medical-primary), var(--medical-accent));
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 10px rgba(13, 115, 119, 0.3);
+}
+
+.brand-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--medical-dark);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.brand-tagline {
+  font-size: 0.7rem;
+  color: var(--medical-primary);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.navbar-medical .nav-link {
+  color: #495057;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin: 0 2px;
+}
+
+.navbar-medical .nav-link:hover,
+.navbar-medical .nav-link.active {
+  color: var(--medical-primary);
+  background: rgba(13, 115, 119, 0.08);
+}
+
+.navbar-medical .nav-link i {
+  font-size: 1rem;
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--medical-primary), var(--medical-accent));
+  color: white;
+  border: none;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(13, 115, 119, 0.3);
+  color: white;
+} */
+
+/* Footer */
+.footer-medical {
+  background: linear-gradient(135deg, #023e8a 0%, #03256c 100%);
+}
+
+.footer-top {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-links li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  padding-left: 5px;
+}
+
+.footer-links i {
+  margin-right: 6px;
+  font-size: 0.7rem;
+  color: var(--medical-accent);
+}
+
+.footer-bottom {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Stat Cards */
+.stat-card {
+  border-radius: 16px;
+  border: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(30%, -30%);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.stat-card h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.stat-card small {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Feature Cards */
+.feature-card {
+  border-radius: 20px;
+  border: 1px solid rgba(13, 115, 119, 0.1);
+  transition: all 0.4s ease;
+  background: #fff;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(13, 115, 119, 0.12) !important;
+  border-color: rgba(13, 115, 119, 0.2);
+}
+
+.icon-circle {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.8rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat Interface */
+.chat-card {
+  border-radius: 20px;
+  border: 1px solid rgba(13, 115, 119, 0.15);
+  overflow: hidden;
+}
+
+.chat-body {
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 1.5rem;
+}
+
+.message-bubble {
+  border-radius: 16px;
+  animation: fadeInUp 0.3s ease;
+  line-height: 1.6;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.avatar {
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ayurveda Theme */
+.bg-ayurveda {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%) !important;
+  border: 1px solid #a5d6a7;
+}
+
+.text-medical {
+  color: var(--medical-primary) !important;
+}
+
+.bg-medical {
+  background: linear-gradient(135deg, var(--medical-dark), var(--medical-primary)) !important;
+}
+
+/* Progress Bars */
+.progress {
+  border-radius: 10px;
+  background-color: #e9ecef;
+  overflow: hidden;
+}
+
+.progress-bar {
+  border-radius: 10px;
+  transition: width 0.6s ease;
+}
+
+/* Tables */
+.table-hover tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(13, 115, 119, 0.04);
+  transform: scale(1.002);
+}
+
+/* Cards */
+.card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card-header {
+  border-radius: 16px 16px 0 0 !important;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Alerts */
+.alert {
+  border-radius: 12px;
+  border: none;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .navbar-medical {
+    padding: 0.5rem 0;
+  }
+  
+  .brand-title {
+    font-size: 1.1rem;
+  }
+  
+  .stat-card h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--medical-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--medical-dark);
+}
