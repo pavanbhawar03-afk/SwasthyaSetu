@@ -113,7 +113,7 @@ app.get('/seed', async (req, res) => {
 });
 
 app.use((req, res) => {
-  res.status(404).render('index', { 
+  res.status(404).render('index', {
     title: 'Page Not Found',
     stats: { totalPatients: 0, pendingReview: 0, redFlags: 0 }
   });
