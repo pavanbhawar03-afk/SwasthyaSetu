@@ -33,6 +33,7 @@ const patientRoutes = require('./routes/patients');
 const documentRoutes = require('./routes/documents');
 const dashboardRoutes = require('./routes/dashboard');
 const WrapAsync = require('./utils/WrapAsync');
+const ExpressError=require('./utils/ExpressError');
 
 app.use('/', indexRoutes);           // Landing + Home
 app.use('/patients', patientRoutes); // Feature 1: AI Chat Case Taking
