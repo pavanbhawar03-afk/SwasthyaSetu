@@ -32,6 +32,7 @@ const indexRoutes = require('./routes/index');
 const patientRoutes = require('./routes/patients');
 const documentRoutes = require('./routes/documents');
 const dashboardRoutes = require('./routes/dashboard');
+const WrapAsync = require('./utils/WrapAsync');
 
 app.use('/', indexRoutes);           // Landing + Home
 app.use('/patients', patientRoutes); // Feature 1: AI Chat Case Taking
@@ -39,7 +40,7 @@ app.use('/documents', documentRoutes); // Feature 2: Upload + OCR
 app.use('/dashboard', dashboardRoutes); // Feature 3: Doctor Review
 
 
-app.get('/seed', async (req, res) => {
+app.get('/seed',WrapAsync(async (req, res) => {
   try {
     const Patient = require('./models/Patient');
     const Document = require('./models/Document');
@@ -110,7 +111,7 @@ app.get('/seed', async (req, res) => {
   } catch (err) {
     res.status(500).send('❌ Seed Error: ' + err.message);
   }
-});
+}));
 
 app.use((req, res) => {
   res.status(404).render('index', {
